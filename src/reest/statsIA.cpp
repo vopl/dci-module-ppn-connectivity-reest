@@ -18,13 +18,14 @@ namespace dci::module::ppn::connectivity::reest
 
             U() : _stub{} {}
             ~U() {}
-        } u;
+        } u{};
 
         const char* p1 = static_cast<const char*>(static_cast<const void*>(&u._rec.first));
         const char* p2 = static_cast<const char*>(static_cast<const void*>(&u._rec.second));
+        std::size_t offset = p2-p1;
 
         const char* p = static_cast<const char*>(static_cast<const void*>(&stat));
-        p = p - p2 + p1;
+        p = p - offset;
 
         return *static_cast<const KeyIA*>(static_cast<const void*>(p));
     }
